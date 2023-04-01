@@ -29,7 +29,7 @@
 import "./index.css";
 
 import { createApp } from "vue";
-import App from "./app.vue";
+import App from "./app/app.vue";
 
 createApp(App).mount("#app");
 
