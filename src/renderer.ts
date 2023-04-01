@@ -29,10 +29,8 @@
 import "./index.css";
 
 import { createApp } from "vue";
-import VueTest from "./vuetest.vue";
+import App from "./app.vue";
 
-createApp(VueTest).mount("#app");
+createApp(App).mount("#app");
 
-console.log(
-  '👋 This message is being logged by "renderer.js", included via webpack'
-);
+console.log(window.dataFolder.readDataFolder());
