@@ -3,10 +3,10 @@
 
 import { contextBridge } from "electron";
 import { readdirSync, statSync } from "fs";
-import { TreeNode } from "./app/types/tree-nodes";
+import { createTreeNode } from "./app/types/tree-nodes";
 
 function buildTree(rootPath: string) {
-  const root = new TreeNode(rootPath);
+  const root = createTreeNode(rootPath);
 
   const stack = [root];
 
@@ -19,7 +19,7 @@ function buildTree(rootPath: string) {
 
       for (const child of children) {
         const childPath = `${currentNode.path}/${child}`;
-        const childNode = new TreeNode(childPath);
+        const childNode = createTreeNode(childPath);
         currentNode.children.push(childNode);
 
         if (statSync(childNode.path).isDirectory()) {

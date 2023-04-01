@@ -8,6 +8,6 @@ const dirs: TreeNode = ref(window.dataFolder.readDataFolder())
 
 <template>
 	<div>
-		<FileList :file-tree="dirs" />
+		<FileList v-for="folders of dirs.children" :file-tree="folders" />
 	</div>
 </template>

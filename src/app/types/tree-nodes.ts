@@ -1,12 +1,13 @@
-class TreeNode {
-  public path: string;
-  public children: Array<TreeNode>;
-  public isDirectory: boolean;
+type TreeNode = {
+  path: string;
+  children: Array<TreeNode>;
+  isDirectory: boolean;
+};
 
-  constructor(path: string) {
-    this.path = path;
-    this.children = [];
-  }
-}
+const createTreeNode = (path: string): TreeNode => ({
+  path,
+  children: [],
+  isDirectory: false,
+});
 
-export { TreeNode };
+export { TreeNode, createTreeNode };
