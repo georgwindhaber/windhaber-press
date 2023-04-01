@@ -32,4 +32,8 @@ export const rules: Required<ModuleOptions>["rules"] = [
     test: /\.vue$/,
     loader: "vue-loader",
   },
+  {
+    test: /\.s[ac]ss$/i,
+    use: ["style-loader", "css-loader", "sass-loader"],
+  },
 ];
