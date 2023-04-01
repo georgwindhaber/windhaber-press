@@ -8,6 +8,9 @@ const useGeneralStore = defineStore("general", {
       this.markdownInput = file.toString();
       this.activeFile = path;
     },
+    saveFile() {
+      window.dataFolder.writeFile(this.activeFile, this.markdownInput);
+    },
   },
 });
 

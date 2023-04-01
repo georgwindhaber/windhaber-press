@@ -7,7 +7,7 @@ body,
 }
 
 * {
-  box-sizing: content-box;
+  box-sizing: border-box;
   margin: 0;
   color: var(--color-text);
   background-color: var(--color-surface-100);
