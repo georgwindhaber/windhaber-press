@@ -7,7 +7,10 @@ const props = defineProps<{
 	level?: number
 }>()
 
-const emit = defineEmits<{ (e: 'fileSelect', file: string): void }>()
+// const emit2 = defineEmits<{ (e: 'fileSelect', file: string): void }>()
+const emit = defineEmits<{
+	(e: 'fileSelect', file: string): void
+}>()
 
 const isDirectoryOpen = ref(props.fileTree.isDirectory)
 
@@ -24,8 +27,11 @@ const handleClick = () => {
 		isDirectoryOpen.value = !isDirectoryOpen.value
 	} else {
 		emit("fileSelect", props.fileTree.path)
-		console.log("emitted", props.fileTree.path)
 	}
+}
+
+const passFileSelect = (path: string) => {
+	emit("fileSelect", path)
 }
 </script>
 
@@ -35,7 +41,8 @@ const handleClick = () => {
 		{{ getName(props.fileTree.path) }}
 	</button>
 	<template v-if="props.fileTree.isDirectory && isDirectoryOpen">
-		<FileTree v-for="child of props.fileTree.children" :file-tree="child" :level="absoluteLevel + 1" />
+		<FileTree v-for="child of props.fileTree.children" :file-tree="child" :level="absoluteLevel + 1"
+			@file-select="passFileSelect" />
 	</template>
 </template>
 

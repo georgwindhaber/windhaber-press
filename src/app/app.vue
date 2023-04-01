@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue';
 
 import Files from "./files.vue"
@@ -6,7 +6,6 @@ import Editor from "./editor.vue"
 import Preview from "./preview.vue"
 
 const markdownInput = ref("")
-
 </script>
 
 <template>
