@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import type { TreeNode } from "../types/tree-nodes"
+import { useGeneralStore } from "../stores/general"
 
 const props = defineProps<{
 	fileTree: TreeNode
 	level?: number
 }>()
 
-// const emit2 = defineEmits<{ (e: 'fileSelect', file: string): void }>()
-const emit = defineEmits<{
-	(e: 'fileSelect', file: string): void
-}>()
+const generalStore = useGeneralStore()
 
 const isDirectoryOpen = ref(props.fileTree.isDirectory)
 
@@ -26,12 +24,8 @@ const handleClick = () => {
 	if (props.fileTree.isDirectory) {
 		isDirectoryOpen.value = !isDirectoryOpen.value
 	} else {
-		emit("fileSelect", props.fileTree.path)
+		generalStore.openFile(props.fileTree.path)
 	}
-}
-
-const passFileSelect = (path: string) => {
-	emit("fileSelect", path)
 }
 </script>
 
@@ -41,8 +35,7 @@ const passFileSelect = (path: string) => {
 		{{ getName(props.fileTree.path) }}
 	</button>
 	<template v-if="props.fileTree.isDirectory && isDirectoryOpen">
-		<FileTree v-for="child of props.fileTree.children" :file-tree="child" :level="absoluteLevel + 1"
-			@file-select="passFileSelect" />
+		<FileTree v-for="child of props.fileTree.children" :file-tree="child" :level="absoluteLevel + 1" />
 	</template>
 </template>
 

@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 import Files from "./files.vue"
 import Editor from "./editor.vue"
 import Preview from "./preview.vue"
+import { useGeneralStore } from './stores/general';
 
-const markdownInput = ref("")
+const generalStore = useGeneralStore()
+
 </script>
 
 <template>
 	<Files />
-	<Editor @change="(change) => markdownInput = change" />
-	<Preview :markdown-string="markdownInput" />
+	<Editor />
+	<Preview />
 </template>
 
 <style lang="scss"></style>

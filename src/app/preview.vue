@@ -1,14 +1,13 @@
 <script setup>
 import MarkdownIt from "markdown-it"
 import { computed } from "vue";
+import { useGeneralStore } from "./stores/general";
 const md = new MarkdownIt();
 
-const props = defineProps({
-	markdownString: String
-})
+const generalStore = useGeneralStore()
 
 const html = computed(() => {
-	return md.render(props.markdownString)
+	return md.render(generalStore.markdownInput)
 })
 
 </script>

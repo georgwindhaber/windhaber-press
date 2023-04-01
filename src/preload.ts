@@ -2,10 +2,10 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 import { contextBridge } from "electron";
-import { readdirSync, statSync } from "fs";
+import { readFileSync, readdirSync, statSync } from "fs";
 import { createTreeNode } from "./app/types/tree-nodes";
 
-function buildTree(rootPath: string) {
+const buildTree = (rootPath: string) => {
   const root = createTreeNode(rootPath);
 
   const stack = [root];
@@ -30,8 +30,9 @@ function buildTree(rootPath: string) {
   }
 
   return root;
-}
+};
 
 contextBridge.exposeInMainWorld("dataFolder", {
   readDataFolder: () => buildTree("./data"),
+  readFile: (path: string) => readFileSync(path, "utf8"),
 });

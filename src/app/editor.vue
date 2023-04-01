@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useGeneralStore } from './stores/general';
 
-const emit = defineEmits(["change"])
-
-const markdownText = ref("")
-
-const handleInput = (event: Event) => {
-	markdownText.value = (event.target as HTMLTextAreaElement).value
-	emit("change", markdownText.value)
-}
+const generalStore = useGeneralStore()
 
 </script>
 
 <template>
-	<textarea class="editor" @input="handleInput" re />
+	<textarea class="editor" v-model="generalStore.markdownInput" />
 </template>
 
 <style scoped lang="scss">
