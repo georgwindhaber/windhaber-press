@@ -9,8 +9,40 @@ body,
 * {
   box-sizing: content-box;
   margin: 0;
+  color: var(--color-text);
+  background-color: var(--color-surface-100);
 }
 
 #app {
   display: flex;
+}
+
+// Colors
+
+:root {
+  // CSS DARK THEME PRIMARY COLORS
+  --color-primary-100: #e62937;
+  --color-primary-200: #ed4c4b;
+  --color-primary-300: #f3675f;
+  --color-primary-400: #f97f74;
+  --color-primary-500: #fd958a;
+  --color-primary-600: #ffaba0;
+
+  // CSS DARK THEME SURFACE COLORS
+  --color-surface-100: #060606;
+  --color-surface-200: #212121;
+  --color-surface-300: #383838;
+  --color-surface-400: #515151;
+  --color-surface-500: #6b6b6b;
+  --color-surface-600: #878787;
+
+  // CSS DARK THEME MIXED SURFACE COLORS
+  --color-surface-mixed-100: #1f110e;
+  --color-surface-mixed-200: #342725;
+  --color-surface-mixed-300: #4a3e3c;
+  --color-surface-mixed-400: #625655;
+  --color-surface-mixed-500: #7a706f;
+  --color-surface-mixed-600: #938b8a;
+
+  --color-text: #ffffff;
 }

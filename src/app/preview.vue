@@ -16,3 +16,10 @@ const html = computed(() => {
 <template>
 	<div v-html="html"></div>
 </template>
+
+<style lang="scss">
+a {
+	color: var(--color-primary-100);
+	font-weight: bold;
+}
+</style>
