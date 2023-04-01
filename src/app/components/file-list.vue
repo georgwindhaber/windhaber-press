@@ -36,6 +36,8 @@ const paddingLeft = `padding-left: ${absoluteLevel.value * 0.75}rem`
 	padding: 6px 4px 6px 0.75rem;
 	font-size: 16px;
 
+	cursor: pointer;
+
 	&:hover {
 		background-color: var(--color-surface-200);
 	}
