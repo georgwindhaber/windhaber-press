@@ -1,18 +1,18 @@
 <script setup>
 import { ref, watch } from 'vue';
 
-import files from "./files.vue"
-import editor from "./editor.vue"
-import preview from "./preview.vue"
+import Files from "./files.vue"
+import Editor from "./editor.vue"
+import Preview from "./preview.vue"
 
 const markdownInput = ref("")
 
 </script>
 
 <template>
-	<files />
-	<editor @change="(change) => markdownInput = change" />
-	<preview :markdown-string="markdownInput" />
+	<Files />
+	<Editor @change="(change) => markdownInput = change" />
+	<Preview :markdown-string="markdownInput" />
 </template>
 
 <style lang="scss"></style>

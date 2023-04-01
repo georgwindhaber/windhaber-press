@@ -14,8 +14,14 @@ const html = computed(() => {
 </script>
 
 <template>
-	<div v-html="html"></div>
+	<div class="editor" v-html="html"></div>
 </template>
+
+<style scoped lang="scss">
+.editor {
+	padding: 8px;
+}
+</style>
 
 <style lang="scss">
 a {
