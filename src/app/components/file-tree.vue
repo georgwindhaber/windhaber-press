@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 import type { TreeNode } from "../types/tree-nodes"
 
 const getName = (path: string) => {
@@ -12,6 +12,8 @@ const props = defineProps<{
 	level?: number
 }>()
 
+const emit = defineEmits<{ (e: 'fileSelect', file: string): void }>()
+
 const absoluteLevel = computed(() => props.level | 0)
 const paddingLeft = `padding-left: ${absoluteLevel.value * 0.75}rem`
 
@@ -19,7 +21,8 @@ const handleClick = () => {
 	if (props.fileTree.isDirectory) {
 		// Todo: Add collapse
 	} else {
-		console.log(props.fileTree.path)
+		emit("fileSelect", props.fileTree.path)
+		console.log("emitted", props.fileTree.path)
 	}
 }
 </script>

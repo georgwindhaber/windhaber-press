@@ -5,11 +5,16 @@ import { TreeNode } from "./types/tree-nodes";
 
 const dirs: TreeNode = ref(window.dataFolder.readDataFolder())
 
+const openFile = (path: string) => {
+	console.log("her", path)
+}
+
 </script>
 
 <template>
 	<div class="files">
-		<FileTree v-for="folders of dirs.children" :file-tree="folders" />
+		<FileTree v-for="folders of dirs.children" :key="folders.path" :file-tree="folders"
+			@file-select="(e) => openFile(e)" />
 	</div>
 </template>
 
