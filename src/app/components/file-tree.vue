@@ -1,13 +1,53 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import FileList from './file-list.vue';
-import { TreeNode } from '../types/tree-nodes';
+import { computed, defineProps } from "vue";
+import type { TreeNode } from "../types/tree-nodes"
 
-const dirs: TreeNode = ref(window.dataFolder.readDataFolder())
+const getName = (path: string) => {
+	const folders = path.split("/")
+	return folders[folders.length - 1]
+}
+
+const props = defineProps<{
+	fileTree: TreeNode
+	level?: number
+}>()
+
+const absoluteLevel = computed(() => props.level | 0)
+const paddingLeft = `padding-left: ${absoluteLevel.value * 0.75}rem`
+
+const handleClick = () => {
+	if (props.fileTree.isDirectory) {
+		// Todo: Add collapse
+	} else {
+		console.log(props.fileTree.path)
+	}
+}
 </script>
 
+
 <template>
-	<div>
-		<FileList v-for="folders of dirs.children" :file-tree="folders" />
-	</div>
+	<button class="file" :style="paddingLeft" @click="handleClick">
+		{{ getName(props.fileTree.path) }}
+	</button>
+	<template v-if="props.fileTree.isDirectory">
+		<FileTree v-for="child of props.fileTree.children" :file-tree="child" :level="absoluteLevel + 1" />
+	</template>
 </template>
+
+<style scoped lang="scss">
+.file {
+	display: block;
+	width: 100%;
+	border: none;
+	padding: 0;
+	text-align: left;
+	padding: 6px 4px 6px 0.75rem;
+	font-size: 16px;
+
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--color-surface-200);
+	}
+}
+</style>

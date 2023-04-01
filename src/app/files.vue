@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import FileTree from "./components/file-tree.vue"
+import { TreeNode } from "./types/tree-nodes";
+
+const dirs: TreeNode = ref(window.dataFolder.readDataFolder())
 
 </script>
 
 <template>
 	<div class="files">
-		<FileTree />
+		<FileTree v-for="folders of dirs.children" :file-tree="folders" />
 	</div>
 </template>
 
