@@ -1,18 +1,15 @@
 <script setup>
-import { computed } from '@vue/reactivity';
 import { ref } from 'vue';
-import MarkdownIt from "markdown-it"
 
-const md = new MarkdownIt();
+import files from "./files.vue"
+import editor from "./editor.vue"
+import preview from "./preview.vue"
 
 const markdownInput = ref("")
-const markdown = computed(() => {
-	return md.render(markdownInput.value)
-})
 </script>
 
 <template>
-	<textarea v-model="markdownInput" />
-
-	<div v-html="markdown"></div>
+	<files />
+	<editor v-model="markdownInput" />
+	<preview :markdown-string="markdownInput" />
 </template>
