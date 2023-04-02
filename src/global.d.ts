@@ -1,5 +1,7 @@
+import { TreeNode } from "./app/types/tree-nodes";
+
 export interface IDataFolder {
-  readDataFolder: () => Promise<void>;
+  readDataFolder: () => TreeNode;
   readFile: (path: string) => Buffer;
   writeFile: (path: string, content: string) => void;
 }

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import FileTree from "./components/file-tree.vue"
-import { TreeNode } from "./types/tree-nodes";
 import { useGeneralStore } from "./stores/general";
 
-const dirs: TreeNode = ref(window.dataFolder.readDataFolder())
+const dirs = ref(window.dataFolder.readDataFolder())
 
 const generalStore = useGeneralStore()
 
