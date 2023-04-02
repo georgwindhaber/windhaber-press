@@ -90,3 +90,6 @@ typings/
 
 # Electron-Forge
 out/
+
+# Vitepress
+src/press/.vitepress/cache/
