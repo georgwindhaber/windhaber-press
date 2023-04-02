@@ -3,8 +3,6 @@ import { ref } from "vue";
 import FileTree from "./components/file-tree.vue"
 import { useGeneralStore } from "./stores/general";
 
-const dirs = ref(window.dataFolder.readDataFolder())
-
 const generalStore = useGeneralStore()
 
 </script>
@@ -12,7 +10,7 @@ const generalStore = useGeneralStore()
 <template>
 	<div class="files">
 		<div>
-			<FileTree v-for="folders of dirs.children" :key="folders.path" :file-tree="folders" />
+			<FileTree v-for="folders of generalStore.directories.children" :key="folders.path" :file-tree="folders" />
 		</div>
 		<button class="save" @click="generalStore.saveFile">Save</button>
 	</div>

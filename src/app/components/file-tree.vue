@@ -30,10 +30,11 @@ const handleClick = () => {
 }
 
 const addFile = () => {
-	console.log("file")
+	generalStore.addFile(props.fileTree.path + "/new-file")
 }
 
 const addDirectory = () => {
+	generalStore.addDirectory(props.fileTree.path + "/new-folder")
 	console.log("dir")
 }
 
