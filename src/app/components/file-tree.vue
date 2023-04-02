@@ -59,6 +59,13 @@ const exitCreateNew = () => {
 	createMode.value = "none"
 }
 
+const handleDelete = () => {
+	const result = confirm(`Do you really want to delete ${getName(props.fileTree.path)}?`)
+	if (result) {
+		generalStore.deleteItem(props.fileTree.path)
+	}
+}
+
 </script>
 
 
@@ -70,13 +77,16 @@ const exitCreateNew = () => {
 			</span>
 			{{ getName(props.fileTree.path) }}
 		</span>
-		<div class="add-buttons" v-if="props.fileTree.isDirectory">
-			<button class="add-button" @click.stop="createNew('file')">
-				<v-icon name="ri-file-add-line"></v-icon>
-			</button>
-			<button class="add-button" @click.stop="createNew('directory')">
-				<v-icon name="ri-folder-add-line"></v-icon>
-			</button>
+		<div class="button-container">
+			<div class="add-buttons" v-if="props.fileTree.isDirectory">
+				<button class="icon-button" @click.stop="createNew('file')">
+					<v-icon name="ri-file-add-line"></v-icon>
+				</button>
+				<button class="icon-button" @click.stop="createNew('directory')">
+					<v-icon name="ri-folder-add-line"></v-icon>
+				</button>
+			</div>
+			<button class="icon-button" @click.stop="handleDelete"><v-icon name="ri-delete-bin-7-line"></v-icon></button>
 		</div>
 	</button>
 	<div v-if="createMode !== 'none'">
@@ -108,9 +118,13 @@ const exitCreateNew = () => {
 	}
 }
 
+.button-container {
+	display: flex;
+}
+
 $add-button-size: 20px;
 
-.add-button {
+.icon-button {
 	height: $add-button-size;
 	width: $add-button-size;
 	border: none;

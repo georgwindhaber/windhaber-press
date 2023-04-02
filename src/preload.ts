@@ -7,6 +7,7 @@ import {
   mkdirSync,
   readFileSync,
   readdirSync,
+  rmSync,
   statSync,
   writeFileSync,
 } from "fs";
@@ -45,4 +46,5 @@ contextBridge.exposeInMainWorld("dataFolder", {
   writeFile: (path: string, content: string) => writeFileSync(path, content),
   addFile: (path: string) => appendFileSync(path + ".md", ""),
   addDirectory: (path: string) => mkdirSync(path),
+  deleteItem: (path: string) => rmSync(path, { recursive: true, force: true }),
 });

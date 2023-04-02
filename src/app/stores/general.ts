@@ -26,6 +26,10 @@ const useGeneralStore = defineStore("general", {
       window.dataFolder.addDirectory(path);
       this.updateDirectories();
     },
+    deleteItem(path: string) {
+      window.dataFolder.deleteItem(path);
+      this.updateDirectories();
+    },
   },
 });
 

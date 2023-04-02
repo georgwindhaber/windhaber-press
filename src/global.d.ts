@@ -6,6 +6,7 @@ export interface IDataFolder {
   writeFile: (path: string, content: string) => void;
   addFile: (path: string, content: string) => void;
   addDirectory: (path: string) => void;
+  deleteItem: (path: string) => void;
 }
 
 declare global {
