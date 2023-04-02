@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, nextTick } from "vue";
 import type { TreeNode } from "../types/tree-nodes"
 import { useGeneralStore } from "../stores/general"
 
@@ -11,6 +11,9 @@ const props = defineProps<{
 const generalStore = useGeneralStore()
 
 const isDirectoryOpen = ref(props.fileTree.isDirectory)
+type CreateModes = "none" | "file" | "directory"
+const createMode = ref<CreateModes>("none")
+const createInput = ref<HTMLInputElement | null>(null)
 
 const absoluteLevel = computed(() => props.level | 0)
 const paddingLeft = `padding-left: ${absoluteLevel.value * 0.75}rem`
@@ -29,13 +32,31 @@ const handleClick = () => {
 	}
 }
 
-const addFile = () => {
-	generalStore.addFile(props.fileTree.path + "/new-file")
+const addFile = (filename: string) => {
+	generalStore.addFile(props.fileTree.path + "/" + filename)
 }
 
-const addDirectory = () => {
-	generalStore.addDirectory(props.fileTree.path + "/new-folder")
-	console.log("dir")
+const addDirectory = (directoryName: string) => {
+	generalStore.addDirectory(props.fileTree.path + "/" + directoryName)
+}
+const createNew = (type: CreateModes) => {
+	if (type !== "none") {
+		isDirectoryOpen.value = true
+	}
+	createMode.value = type
+	nextTick(() => {
+		if (createInput.value) {
+			createInput.value.focus()
+		}
+	})
+}
+
+const exitCreateNew = () => {
+	if (createInput?.value?.value) {
+		createMode.value === "file" ?
+			addFile(createInput.value.value) : addDirectory(createInput.value.value)
+	}
+	createMode.value = "none"
 }
 
 </script>
@@ -50,14 +71,17 @@ const addDirectory = () => {
 			{{ getName(props.fileTree.path) }}
 		</span>
 		<div class="add-buttons" v-if="props.fileTree.isDirectory">
-			<button class="add-button" @click.stop="addFile">
+			<button class="add-button" @click.stop="createNew('file')">
 				<v-icon name="ri-file-add-line"></v-icon>
 			</button>
-			<button class="add-button" @click.stop="addDirectory">
+			<button class="add-button" @click.stop="createNew('directory')">
 				<v-icon name="ri-folder-add-line"></v-icon>
 			</button>
 		</div>
 	</button>
+	<div v-if="createMode !== 'none'">
+		<input type="text" ref="createInput" class="create-input" @keydown.enter="exitCreateNew" @blur="exitCreateNew" />
+	</div>
 	<template v-if="props.fileTree.isDirectory && isDirectoryOpen">
 		<FileTree v-for="child of props.fileTree.children" :file-tree="child" :level="absoluteLevel + 1" />
 	</template>
@@ -97,6 +121,16 @@ $add-button-size: 20px;
 
 	&:hover {
 		background-color: var(--color-surface-300);
+	}
+}
+
+.create-input {
+	background-color: var(--color-surface-300);
+	border: none;
+	outline: none;
+
+	&:focus {
+		outline: var(--color-surface-400) 1px solid;
 	}
 }
 </style>
