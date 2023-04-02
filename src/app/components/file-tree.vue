@@ -14,6 +14,7 @@ const isDirectoryOpen = ref(props.fileTree.isDirectory)
 
 const absoluteLevel = computed(() => props.level | 0)
 const paddingLeft = `padding-left: ${absoluteLevel.value * 0.75}rem`
+const rotateDirectoryChevron = computed(() => isDirectoryOpen.value ? "transform: rotate(90deg)" : "")
 
 const getName = (path: string) => {
 	const folders = path.split("/")
@@ -41,10 +42,19 @@ const addDirectory = () => {
 
 <template>
 	<button class="file" :style="paddingLeft" @click="handleClick">
-		<span class="file-name">{{ getName(props.fileTree.path) }}</span>
+		<span class="file-name">
+			<span v-if="props.fileTree.isDirectory">
+				<v-icon name="ri-arrow-right-s-line" scale="1" :style="rotateDirectoryChevron"></v-icon>
+			</span>
+			{{ getName(props.fileTree.path) }}
+		</span>
 		<div class="add-buttons" v-if="props.fileTree.isDirectory">
-			<button class="add-button" @click.stop="addFile">+</button>
-			<button class="add-button" @click.stop="addDirectory">/</button>
+			<button class="add-button" @click.stop="addFile">
+				<v-icon name="ri-file-add-line"></v-icon>
+			</button>
+			<button class="add-button" @click.stop="addDirectory">
+				<v-icon name="ri-folder-add-line"></v-icon>
+			</button>
 		</div>
 	</button>
 	<template v-if="props.fileTree.isDirectory && isDirectoryOpen">
@@ -81,6 +91,7 @@ $add-button-size: 20px;
 	border: none;
 	border-radius: 8px;
 	margin-right: 4px;
+	padding: 0;
 	// background-color: var(--color-surface-200);
 
 	&:hover {

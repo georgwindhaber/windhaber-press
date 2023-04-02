@@ -32,8 +32,14 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./app/app.vue";
 
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import * as RiIcons from "oh-vue-icons/icons/ri";
+const Ri = Object.values({ ...RiIcons });
+addIcons(...Ri);
+
 const pinia = createPinia();
 const app = createApp(App);
 
 app.use(pinia);
+app.component("v-icon", OhVueIcon);
 app.mount("#app");

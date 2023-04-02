@@ -47,6 +47,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "fs": "^0.0.1-security",
     "markdown-it": "^13.0.1",
+    "oh-vue-icons": "^1.0.0-rc3",
     "pinia": "^2.0.33",
     "vue": "^3.2.47"
   }
